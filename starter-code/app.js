@@ -2,20 +2,18 @@
 //require express
 const express = require('express');
 
-//require routes
-const mainRoutes = require('./routes/main');
-
 //start express app
 const app = express()
 
 //define port
-const port = 3000
+const port = 3000;
 
 //serve static files from public folder
 app.use(express.static('public'));
 
-//use mainroutes
-app.use('/', mainRoutes);
+app.get('/', (req, res) => res.sendFile(__dirname + '/views/index.html'));
+app.get('/about', (req, res) => res.sendFile(__dirname + '/views/about.html'));
+app.get('/gallery', (req, res) => res.sendFile(__dirname + '/views/gallery.html'));
 
 //return 404 if requested file not found
 app.get('*', (req, res) => res.send('404 - Page not found'))
